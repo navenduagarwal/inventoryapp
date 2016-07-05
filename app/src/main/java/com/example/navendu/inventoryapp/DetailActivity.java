@@ -1,10 +1,12 @@
 package com.example.navendu.inventoryapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -103,19 +105,33 @@ public class DetailActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InventoryDbHelper dbHelper = new InventoryDbHelper(DetailActivity.this);
-                String name = product.getProductName();
-                if (dbHelper.deleteSingleRecord(productId)) {
-                    Toast.makeText(DetailActivity.this, name + " " + getResources().getString(R.string.success_product_delete),
-                            Toast.LENGTH_SHORT).show();
-                    dbHelper.close();
-                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(DetailActivity.this, getResources().getString(R.string.error_product_delete),
-                            Toast.LENGTH_SHORT).show();
-                }
-                dbHelper.close();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                InventoryDbHelper dbHelper = new InventoryDbHelper(DetailActivity.this);
+                                String name = product.getProductName();
+                                if (dbHelper.deleteSingleRecord(productId)) {
+                                    Toast.makeText(DetailActivity.this, name + " " + getResources().getString(R.string.success_product_delete),
+                                            Toast.LENGTH_SHORT).show();
+                                    dbHelper.close();
+                                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(DetailActivity.this, getResources().getString(R.string.error_product_delete),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                                dbHelper.close();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(DetailActivity.this);
+                ab.setMessage(getResources().getString(R.string.dialog_delete_confirm)).setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
         });
 

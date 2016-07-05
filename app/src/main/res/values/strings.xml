@@ -4,6 +4,7 @@
     <string name="activity_productadd_label">Add Product</string>
     <string name="activity_detail_label">Product Detail</string>
     <!--button labels-->
+    <string name="button_list_label">Sale</string>
     <string name="button_add">Add</string>
     <string name="button_refresh">Refresh</string>
     <string name="buton_deleteAll">Delete All</string>
@@ -12,6 +13,9 @@
     <string name="button_shipment">Add</string>
     <string name="button_order">Order</string>
     <string name="button_delete">Delete Record</string>
+
+    <string name="dialog_delete_confirm">Are you sure you want to delete?</string>
+    <string name="dialog_delete_confirm_all">Are you sure you want to delete all records?</string>
 
     <string name="empty_list">Add new products to the inventory list</string>
 

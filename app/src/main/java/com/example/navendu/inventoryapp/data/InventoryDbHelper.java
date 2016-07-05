@@ -128,7 +128,6 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     //Update product quantity data in the table
     public void updateData(int recordId, int qtyavl, int qtysold, int quantityPosChange) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues updatedValues = new ContentValues();
         updatedValues.put(ProductEntry._ID, recordId);
         updatedValues.put(ProductEntry.COLUMN_QTY_AVL, qtyavl + quantityPosChange);
@@ -136,6 +135,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
             updatedValues.put(ProductEntry.COLUMN_QTY_SOLD, qtysold - quantityPosChange);
         }
         db.update(ProductEntry.TABLE_NAME, updatedValues, ProductEntry._ID + "= ?", new String[]{Long.toString(recordId)});
+        db.close();
     }
 
     public ArrayList<Product> getAllData() {

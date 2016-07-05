@@ -1,7 +1,9 @@
 package com.example.navendu.inventoryapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -33,14 +35,21 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                long viewId = view.getId();
+
+                if (viewId == R.id.button_sale_list) {
+                    Toast.makeText(MainActivity.this, "Testing", Toast.LENGTH_SHORT).show();
+                } else {
                 Product productDetail = productAdapter.getItem(i);
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 Log.v("MainActivity", productDetail.toString());
                 int productId = productDetail.getDbId();
                 intent.putExtra("productParcel", productId);
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
+
     }
 
     @Override
@@ -91,10 +100,25 @@ public class MainActivity extends AppCompatActivity {
 
     //Deleting data
     public void deleteAllData() {
-        InventoryDbHelper dbHelper = new InventoryDbHelper(this);
-        int count = dbHelper.deleteAllEntries();
-        Toast.makeText(this, count + getResources().getString(R.string.success_records_all_deleted), Toast.LENGTH_SHORT).show();
-        dbHelper.close();
-        refreshView();
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        InventoryDbHelper dbHelper = new InventoryDbHelper(MainActivity.this);
+                        int count = dbHelper.deleteAllEntries();
+                        Toast.makeText(MainActivity.this, count + getResources()
+                                .getString(R.string.success_records_all_deleted), Toast.LENGTH_SHORT).show();
+                        dbHelper.close();
+                        refreshView();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+        ab.setMessage(getResources().getString(R.string.dialog_delete_confirm_all)).setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }
