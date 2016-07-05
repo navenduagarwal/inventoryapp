@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">InventoryApp</string>
+    <string name="activity_main_label">Inventory</string>
+    <string name="activity_productadd_label">Add Product</string>
+    <string name="activity_detail_label">Product Detail</string>
+    <!--button labels-->
+    <string name="button_add">Add</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="buton_deleteAll">Delete All</string>
+    <string name="button_add_image">Upload Image</string>
+    <string name="button_sale">Sold</string>
+    <string name="button_shipment">Add</string>
+    <string name="button_order">Order</string>
+    <string name="button_delete">Delete Record</string>
+
+    <string name="empty_list">Add new products to the inventory list</string>
+
+    <!-- hint for product add page-->
+    <string name="product_name_hint">Enter product name</string>
+    <string name="product_desc_hint">Enter short description</string>
+    <string name="product_quantity_hint">Enter quantity as integer value</string>
+    <string name="product_price_hint">Enter price per unit as decimal value</string>
+
+    <!-- hint for product detail page-->
+    <string name="product_sale_hint">Enter quantity</string>
+    <string name="product_shipment_hint">Enter quantity</string>
+    <string name="product_order_hint">Enter quantity</string>
+
+    <!--Error Message for product add-->
+    <string name="error_product_name">Product Name is a required field</string>
+    <string name="error_product_desc">Product Description is a required field</string>
+    <string name="error_product_quantity">Quantity is a required field</string>
+    <string name="error_product_price">Price is a required field</string>
+    <string name="error_product_image">Image is a required field</string>
+    <string name="error_product_db_insert">New product insert to db failed, try again</string>
+    <string name="error_product_sale">Invalid Quantity</string>
+    <string name="error_product_shipment">Invalid Quantity</string>
+    <string name="error_product_order">Invalid Quantity</string>
+    <string name="error_product_delete">Delete unsuccessful</string>
+
+    <!--success message-->
+    <string name="success_product_db_insert">New product inserted to db successfully</string>
+    <string name="success_product_delete">record deleted successfully</string>
+    <string name="success_records_refresh">Data records refreshed from db"</string>
+    <string name="success_records_all_deleted">: Records Deleted from db"</string>
+
+    <!--Menu strings-->
+    <string name="action_add">Add Product</string>
+    <string name="action_delete_all">Delete All Data</string>
+    <string name="action_refresh">Refresh View</string>
+</resources>
